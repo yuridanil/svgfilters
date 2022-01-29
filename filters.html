@@ -1,0 +1,24 @@
+﻿<html>
+
+<head>
+</head>
+
+<body class="dark">
+  <svg id="filters" version="1.1" width="0" height="0" style="display: none;"></svg>
+  <img id="img1" src="./cleanpan3.jpg" width="500">
+  <script>
+    let n = 0;
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    window.onmousedown = (e) => {
+      let filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+      filter.id = "f_" + new Date().getTime();
+      let effect = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+      effect.setAttribute("stdDeviation", Math.floor(Math.random() * 10) + " " + Math.floor(Math.random() * 10));
+      filter.appendChild(effect);
+      document.querySelector("#filters").appendChild(filter);
+      document.querySelector("#img1").style.setProperty("filter", document.querySelector("#img1").style.getPropertyValue("filter") + " url(#" + filter.id + ")");
+    }
+  </script>
+</body>
+
+</html>
